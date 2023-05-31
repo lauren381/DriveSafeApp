@@ -54,4 +54,15 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  textFailed: {
+    color: Colors.RED,
+    alignSelf: 'flex-end',
+  },
+  newAcc: {
+    position: 'absolute',
+    top: 700,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
