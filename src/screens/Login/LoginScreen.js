@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  ImageBackground,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+import {View, Text, ImageBackground} from 'react-native';
 import React, {useState} from 'react';
 import {Images, Colors} from '../../constant';
 import {styles} from './Login.style';
@@ -17,7 +11,17 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [seePassword, setSeePassword] = useState(true);
   const [checkValidEmail, setCheckValidEmail] = useState(false);
+  const handleCheckEmail = text => {
+    let re = /\S+@\S+\.\S+/;
+    let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
+    setEmail(text);
+    if (re.test(text) || regex.test(text)) {
+      setCheckValidEmail(false);
+    } else {
+      setCheckValidEmail(true);
+    }
+  };
   return (
     <View style={styles.main}>
       <ImageBackground
@@ -33,13 +37,19 @@ export default function LoginScreen() {
             placeholder="Email"
             value={email}
             keyboardType="email-address"
+            onChangeText={text => handleCheckEmail(text)}
           />
+          {checkValidEmail ? (
+            <Text style={styles.textFailed}>Wrong format email</Text>
+          ) : (
+            <Text style={styles.textFailed}> </Text>
+          )}
           <View style={styles.wrapperInput}>
             <MyTextInput
               placeholder="Mật khẩu"
               value={password}
               secureTextEntry={seePassword}
-              onChangeText={e => setPassword(e)}
+              onChangeText={text => setPassword(text)}
             />
             <View style={styles.wrapperIcon}>
               <Button
@@ -59,8 +69,8 @@ export default function LoginScreen() {
           <Button primary title={'Đăng nhập'} />
           <Button text title={'Quên mật khẩu'} />
         </View>
-        <View>
-          <Text style={styles.text}>Bạn chưa có tài khoản?</Text>
+        <View style={styles.newAcc}>
+          <Button text title={'Bạn chưa có tài khoản?'} />
         </View>
       </ImageBackground>
     </View>

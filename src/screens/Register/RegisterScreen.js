@@ -1,5 +1,5 @@
 import {View, Text, ImageBackground} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import MyTextInput from '../../components/MyTextInput';
 import Button from '../../components/Button';
 import {styles} from './Register.style';
@@ -7,6 +7,24 @@ import {Images, Colors} from '../../constant';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const RegisterScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repass, setRepass] = useState('');
+  const [seePassword, setSeePassword] = useState(false);
+  const [seeRePassword, setReSeePassword] = useState(false);
+  const [checkValidEmail, setCheckValidEmail] = useState(false);
+  const handleCheckEmail = text => {
+    let re = /\S+@\S+\.\S+/;
+    let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+    setEmail(text);
+    if (re.test(text) || regex.test(text)) {
+      setCheckValidEmail(false);
+    } else {
+      setCheckValidEmail(true);
+    }
+  };
+
   return (
     <View style={styles.main}>
       <ImageBackground
@@ -19,25 +37,50 @@ const RegisterScreen = () => {
         <Text style={styles.texthead}>Đăng ký</Text>
         <View style={styles.form}>
           <MyTextInput placeholder="Họ và tên" />
-          <MyTextInput placeholder="Email" />
+          <MyTextInput
+            placeholder="Email"
+            value={email}
+            keyboardType="email-address"
+            onChangeText={text => handleCheckEmail(text)}
+          />
           <MyTextInput placeholder="Số điện thoại" />
           <View style={styles.wrapperInput}>
-            <MyTextInput placeholder="Mật khẩu" />
+            <MyTextInput
+              placeholder="Mật khẩu"
+              value={password}
+              secureTextEntry={seePassword}
+              onChangeText={text => setPassword(text)}
+            />
             <View style={styles.wrapperIcon}>
               <Button
                 title={
-                  <Icon name="eye-off-sharp" size={28} color={Colors.YELLOW} />
+                  <Icon
+                    name={seePassword ? 'eye-off' : 'eye'}
+                    size={28}
+                    color={Colors.YELLOW}
+                  />
                 }
+                onPress={() => setSeePassword(!seePassword)}
               />
             </View>
           </View>
           <View style={styles.wrapperInput}>
-            <MyTextInput placeholder="Nhập lại mật khẩu" />
+            <MyTextInput
+              placeholder="Nhập lại mật khẩu"
+              value={repass}
+              secureTextEntry={seeRePassword}
+              onChangeText={text => setRepass(text)}
+            />
             <View style={styles.wrapperIcon}>
               <Button
                 title={
-                  <Icon name="eye-off-sharp" size={28} color={Colors.YELLOW} />
+                  <Icon
+                    name={seeRePassword ? 'eye-off' : 'eye'}
+                    size={28}
+                    color={Colors.YELLOW}
+                  />
                 }
+                onPress={() => setReSeePassword(!seeRePassword)}
               />
             </View>
           </View>
