@@ -6,10 +6,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MyTextInput from '../../components/MyTextInput';
 import Button from '../../components/Button';
 
-export default function LoginScreen() {
+export default function LoginScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [seePassword, setSeePassword] = useState(true);
+  const [isPassShown, setIsPassShown] = useState(false);
   const [checkValidEmail, setCheckValidEmail] = useState(false);
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
@@ -29,7 +29,12 @@ export default function LoginScreen() {
         resizeMode="cover"
         style={styles.imagebg}>
         <View style={styles.back}>
-          <Icon name="ios-arrow-back" size={30} color={Colors.BLACK} />
+          <Icon
+            name="ios-arrow-back"
+            size={30}
+            color={Colors.BLACK}
+            onPress={() => navigation.goBack()}
+          />
         </View>
         <Text style={styles.texthead}>Đăng nhập</Text>
         <View style={styles.form}>
@@ -44,23 +49,23 @@ export default function LoginScreen() {
           ) : (
             <Text style={styles.textFailed}> </Text>
           )}
-          <View style={styles.wrapperInput}>
+          <View style={styles.GroupInput}>
             <MyTextInput
               placeholder="Mật khẩu"
               value={password}
-              secureTextEntry={seePassword}
+              secureTextEntry={isPassShown ? false : true}
               onChangeText={text => setPassword(text)}
             />
             <View style={styles.wrapperIcon}>
               <Button
                 title={
                   <Icon
-                    name={seePassword ? 'eye' : 'eye-off'}
+                    name={isPassShown ? 'eye' : 'eye-off'}
                     size={28}
                     color={Colors.YELLOW}
                   />
                 }
-                onPress={() => setSeePassword(!seePassword)}
+                onPress={() => setIsPassShown(!isPassShown)}
               />
             </View>
           </View>
@@ -70,7 +75,12 @@ export default function LoginScreen() {
           <Button text title={'Quên mật khẩu'} />
         </View>
         <View style={styles.newAcc}>
-          <Button text title={'Bạn chưa có tài khoản?'} />
+          <Text style={styles.textbtn}>Bạn chưa có tài khoản?</Text>
+          <Button
+            text
+            title={'Đăng ký'}
+            onPress={() => navigation.navigate('Register')}
+          />
         </View>
       </ImageBackground>
     </View>

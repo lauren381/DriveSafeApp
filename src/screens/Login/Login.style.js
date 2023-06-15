@@ -24,21 +24,20 @@ export const styles = StyleSheet.create({
   texthead: {
     position: 'absolute',
     left: 40,
-    top: 160,
+    top: 140,
     fontFamily: Fonts.MA_SEMIBOLD,
     fontSize: 30,
     color: Colors.YELLOW,
   },
   form: {
     position: 'absolute',
-    width: 367,
     height: 160,
     marginHorizontal: 30,
-    top: 300,
+    top: 250,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  wrapperInput: {
+  GroupInput: {
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -64,5 +63,12 @@ export const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
+  },
+  textbtn: {
+    fontFamily: Fonts.MA_SEMIBOLD,
+    color: Colors.YELLOW,
+    fontSize: 20,
+    textAlign: 'center',
   },
 });

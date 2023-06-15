@@ -11,7 +11,14 @@ const NoticeDetailScreen = () => {
         <View style={styles.back}>
           <Icon name="ios-arrow-back" size={30} color={Colors.BLACK} />
         </View>
-        <Text style={styles.texthead}>Notice Detail</Text>
+        <Text style={styles.texthead}>Chi tiết thông báo</Text>
+      </View>
+      <View style={styles.wrapperCamera}>
+        <Text style={styles.textNotice}>Camera</Text>
+      </View>
+      <View style={styles.wrapperNotify}>
+        <Text style={styles.textNotice}>Notice</Text>
+        <Text style={styles.textNotice}>Notice</Text>
       </View>
     </View>
   );

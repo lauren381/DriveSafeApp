@@ -31,7 +31,6 @@ export const styles = StyleSheet.create({
   },
   form: {
     position: 'absolute',
-    width: 367,
     height: 400,
     marginHorizontal: 30,
     top: 200,

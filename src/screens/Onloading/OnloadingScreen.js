@@ -1,8 +1,14 @@
 import React from 'react';
-import {View, TextInput, Text, StyleSheet, Image} from 'react-native';
+import {View, Image} from 'react-native';
 import {styles} from './Onloading.styles';
 import {Images} from '../../constant';
-function OnloadingScreen() {
+import {useEffect} from 'react';
+function OnloadingScreen({navigation}) {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('Welcome');
+    }, 5000);
+  }, []);
   return (
     <View style={styles.main}>
       <Image

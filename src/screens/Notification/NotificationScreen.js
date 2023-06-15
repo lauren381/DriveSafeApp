@@ -11,7 +11,7 @@ const NotificationScreen = () => {
         <View style={styles.back}>
           <Icon name="ios-arrow-back" size={30} color={Colors.BLACK} />
         </View>
-        <Text style={styles.texthead}>Notifications</Text>
+        <Text style={styles.texthead}>Thông báo</Text>
       </View>
       <View style={styles.wrapperNotify}>
         <Text style={styles.textNotice}>Notice</Text>

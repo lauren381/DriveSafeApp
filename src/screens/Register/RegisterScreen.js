@@ -6,12 +6,12 @@ import {styles} from './Register.style';
 import {Images, Colors} from '../../constant';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const RegisterScreen = () => {
+const RegisterScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [repass, setRepass] = useState('');
-  const [seePassword, setSeePassword] = useState(false);
-  const [seeRePassword, setReSeePassword] = useState(false);
+  const [repassword, setRePassword] = useState('');
+  const [isPassShown, setIsPassShown] = useState(false);
+  const [isRePassShown, setIsRePassShown] = useState(false);
   const [checkValidEmail, setCheckValidEmail] = useState(false);
   const handleCheckEmail = text => {
     let re = /\S+@\S+\.\S+/;
@@ -32,7 +32,12 @@ const RegisterScreen = () => {
         resizeMode="cover"
         style={styles.imagebg}>
         <View style={styles.back}>
-          <Icon name="ios-arrow-back" size={30} color={Colors.BLACK} />
+          <Icon
+            name="ios-arrow-back"
+            size={30}
+            color={Colors.BLACK}
+            onPress={() => navigation.goBack()}
+          />
         </View>
         <Text style={styles.texthead}>Đăng ký</Text>
         <View style={styles.form}>
@@ -48,39 +53,39 @@ const RegisterScreen = () => {
             <MyTextInput
               placeholder="Mật khẩu"
               value={password}
-              secureTextEntry={seePassword}
+              secureTextEntry={isPassShown ? false : true}
               onChangeText={text => setPassword(text)}
             />
             <View style={styles.wrapperIcon}>
               <Button
                 title={
                   <Icon
-                    name={seePassword ? 'eye-off' : 'eye'}
+                    name={isPassShown ? 'eye' : 'eye-off'}
                     size={28}
                     color={Colors.YELLOW}
                   />
                 }
-                onPress={() => setSeePassword(!seePassword)}
+                onPress={() => setIsPassShown(!isPassShown)}
               />
             </View>
           </View>
           <View style={styles.wrapperInput}>
             <MyTextInput
               placeholder="Nhập lại mật khẩu"
-              value={repass}
-              secureTextEntry={seeRePassword}
-              onChangeText={text => setRepass(text)}
+              value={repassword}
+              secureTextEntry={isRePassShown ? false : true}
+              onChangeText={text => setRePassword(text)}
             />
             <View style={styles.wrapperIcon}>
               <Button
                 title={
                   <Icon
-                    name={seeRePassword ? 'eye-off' : 'eye'}
+                    name={isRePassShown ? 'eye' : 'eye-off'}
                     size={28}
                     color={Colors.YELLOW}
                   />
                 }
-                onPress={() => setReSeePassword(!seeRePassword)}
+                onPress={() => setIsRePassShown(!isRePassShown)}
               />
             </View>
           </View>
